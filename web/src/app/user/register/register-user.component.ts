@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../services/user.service';
@@ -28,12 +29,15 @@ import { User } from '../types/user.type';
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatIconModule,
     FormsModule,
     ReactiveFormsModule,
   ],
 })
 export class RegisterUserComponent implements OnInit {
   userRegistrationForm!: FormGroup;
+  hidePassword = true;
+  hideConfirmPassword = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -80,9 +84,17 @@ export class RegisterUserComponent implements OnInit {
         this.toastr.success('User Registered Successfully');
         // this.userRegistrationForm.reset();
         // this.userRegistrationForm.clearValidators();
-        this.userRegistrationForm.markAsUntouched();
-        this.userRegistrationForm.markAsPristine();
+        // this.userRegistrationForm.markAsUntouched();
+        // this.userRegistrationForm.markAsPristine();
       });
     }
+  }
+
+  togglePasswordVisibility(): void {
+    this.hidePassword = !this.hidePassword;
+  }
+
+  toggleConfirmPasswordVisibility(): void {
+    this.hideConfirmPassword = !this.hideConfirmPassword;
   }
 }
