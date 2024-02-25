@@ -9,13 +9,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {
-  AbstractControl,
   FormBuilder,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { debounceTime, distinctUntilKeyChanged, switchMap } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+} from 'rxjs';
 import { MatOptionModule } from '@angular/material/core';
 
 interface FiltersForm {
@@ -69,8 +72,7 @@ export class ListUsersComponent implements OnInit {
     this.userService
       .listenToNotifications('newUserAdded')
       .subscribe((data: User) => {
-        // Handle new user notification here
-        console.log('New User Notification:', data);
+        // Show new user notification
         this.toastr.info('New User ' + data.username + ' added', '', {
           positionClass: 'toast-bottom-left',
         });
@@ -81,7 +83,13 @@ export class ListUsersComponent implements OnInit {
     this.filtersForm.valueChanges
       .pipe(
         debounceTime(300),
-        distinctUntilKeyChanged('query'),
+        distinctUntilChanged((prev, curr) => {
+          return (
+            prev.query === curr.query &&
+            prev.order === curr.order &&
+            prev.sortKey === curr.sortKey
+          );
+        }),
         switchMap((filters: FiltersForm) => {
           return this.userService.getAllUsers(
             filters.query,

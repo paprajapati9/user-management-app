@@ -68,6 +68,7 @@ export class RegisterUserComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log('submit called')
     if (this.userRegistrationForm.valid) {
       // Handle form submission
       const { username, email, password, confirmPassword } =
@@ -82,19 +83,26 @@ export class RegisterUserComponent implements OnInit {
       this.userService.createUser(newUser).subscribe(user => {
         console.log(user, 'user added')
         this.toastr.success('User Registered Successfully');
-        // this.userRegistrationForm.reset();
-        // this.userRegistrationForm.clearValidators();
-        // this.userRegistrationForm.markAsUntouched();
-        // this.userRegistrationForm.markAsPristine();
+        console.log(this.userRegistrationForm, 'form')
+        this.userRegistrationForm.controls['username'].markAsUntouched();
+        this.userRegistrationForm.reset({
+          username: null,
+          email: null,
+          dob: null,
+          password: null,
+          confirmPassword: null,
+        });
       });
     }
   }
 
-  togglePasswordVisibility(): void {
+  togglePasswordVisibility(event: Event): void {
+    event.stopImmediatePropagation();
     this.hidePassword = !this.hidePassword;
   }
 
-  toggleConfirmPasswordVisibility(): void {
+  toggleConfirmPasswordVisibility(event: Event): void {
+    event.stopImmediatePropagation();
     this.hideConfirmPassword = !this.hideConfirmPassword;
   }
 }

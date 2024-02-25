@@ -1,4 +1,4 @@
-<div class="container mx-auto mt-16">
+<div class="container mx-auto mt-16 px-2">
     <h1>Register User</h1>
     <form [formGroup]="userRegistrationForm" (ngSubmit)="onSubmit()" class="grid gap-2 mt-4">
         <mat-form-field appearance="fill">
@@ -18,7 +18,7 @@
         <mat-form-field appearance="fill">
           <mat-label>Password</mat-label>
           <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'">
-          <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+          <button mat-icon-button matSuffix (click)="$event.stopPropagation(); togglePasswordVisibility($event)">
             <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
         </mat-form-field>
@@ -26,7 +26,7 @@
           <mat-label>Confirm Password</mat-label>
           <input matInput formControlName="confirmPassword" [type]="hideConfirmPassword ? 'password' : 'text'">
           <div *ngIf="userRegistrationForm.hasError('passwordMismatch')" class="text-sm text-red-500">Passwords do not match</div>
-          <button mat-icon-button matSuffix (click)="toggleConfirmPasswordVisibility()">
+          <button mat-icon-button matSuffix (click)="$event.stopPropagation(); toggleConfirmPasswordVisibility($event)">
             <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
         </mat-form-field>
