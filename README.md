@@ -48,3 +48,9 @@ There are 2 Critical User Journeys in this application
 3. You can sort users based on username, email, createdAt fields in asc and desc order.
 4. When a new user is registered, you get a info message saying a new user is added without needing to refresh the page.
 5. When a new user is added, the list of users is auto refreshed.
+
+## Data security
+
+1. When creating user, we only store masked password i.e we encrypt it before storing in db.
+2. When user data is fetched for list of users, we have excluded password field from being selected as part of data returned.
+3. When creating user with same email, it returns an error

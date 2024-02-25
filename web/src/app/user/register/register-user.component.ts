@@ -71,12 +71,12 @@ export class RegisterUserComponent implements OnInit {
     console.log('submit called')
     if (this.userRegistrationForm.valid) {
       // Handle form submission
-      const { username, email, password, confirmPassword } =
+      const { username, email, password, confirmPassword, dob } =
         this.userRegistrationForm.value;
       const newUser: User = {
         username: username,
         email: email,
-        age: 30,
+        dob: dob,
         password: password,
         confirmPassword: confirmPassword,
       };

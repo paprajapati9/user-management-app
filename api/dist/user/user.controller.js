@@ -25,6 +25,9 @@ let UserController = class UserController {
     }
     async create(createUserDto) {
         console.log(createUserDto, 'create');
+        if (createUserDto.password !== createUserDto.confirmPassword) {
+            throw new common_1.BadRequestException('Password and ConfirmPassword should be same');
+        }
         try {
             const userCreated = await this.userService.create(createUserDto);
             const userInfo = {
@@ -32,7 +35,7 @@ let UserController = class UserController {
                 email: userCreated.email,
                 username: userCreated.username,
                 createdAt: userCreated.createdAt,
-                dob: userCreated.dob
+                dob: userCreated.dob,
             };
             this.userGateway.newUserNotification(userInfo);
             return userInfo;
@@ -53,6 +56,10 @@ let UserController = class UserController {
 exports.UserController = UserController;
 __decorate([
     (0, common_1.Post)(),
+    (0, common_1.UsePipes)(new common_1.ValidationPipe({
+        transform: true,
+        transformOptions: { enableImplicitConversion: true },
+    })),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),

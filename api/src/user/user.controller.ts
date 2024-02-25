@@ -6,6 +6,8 @@ import {
   Query,
   ValidationPipe,
   ConflictException,
+  UsePipes,
+  BadRequestException,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -21,8 +23,20 @@ export class UserController {
   ) {}
 
   @Post()
+  @UsePipes(
+    new ValidationPipe({
+      transform: true,
+      transformOptions: { enableImplicitConversion: true },
+    }),
+  )
   async create(@Body() createUserDto: CreateUserDto) {
     console.log(createUserDto, 'create');
+
+    if (createUserDto.password !== createUserDto.confirmPassword) {
+      throw new BadRequestException(
+        'Password and ConfirmPassword should be same',
+      );
+    }
 
     try {
       const userCreated = await this.userService.create(createUserDto);
@@ -32,8 +46,8 @@ export class UserController {
         email: userCreated.email,
         username: userCreated.username,
         createdAt: userCreated.createdAt,
-        dob: userCreated.dob
-      }
+        dob: userCreated.dob,
+      };
 
       // Broadcast new user creation notification
       this.userGateway.newUserNotification(userInfo);
@@ -61,6 +75,12 @@ export class UserController {
   ) {
     const { query, offset, limit, order, sortKey } = queryParams;
     console.log(queryParams);
-    return await this.userService.findUsers(query, offset, limit, order, sortKey);
+    return await this.userService.findUsers(
+      query,
+      offset,
+      limit,
+      order,
+      sortKey,
+    );
   }
 }
