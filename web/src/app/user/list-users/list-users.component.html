@@ -1,0 +1,37 @@
+<div class="container mx-auto mt-12 px-2">
+  <h1>Users</h1>
+  <form [formGroup]="filtersForm" class="md:flex gap-2 grid">
+    <mat-form-field appearance="fill">
+      <mat-label>Search Keyword</mat-label>
+      <input matInput formControlName="query" type="string" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Sort By</mat-label>
+      <mat-select formControlName="sortKey">
+        <mat-option *ngFor="let key of sortKeys" [value]="key.value">
+          {{ key.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Sort Order</mat-label>
+        <mat-select formControlName="order">
+          <mat-option value="asc">Asc</mat-option>
+          <mat-option value="desc">Desc</mat-option>
+        </mat-select>
+      </mat-form-field>
+  </form>
+  <div
+    class="grid gap-4"
+    infinite-scroll
+    [infiniteScrollDistance]="1"
+    [infiniteScrollUpDistance]="2"
+    [infiniteScrollThrottle]="300"
+    (scrolled)="onScroll()"
+  >
+    <app-user-card-dumb
+      *ngFor="let user of users"
+      [user]="user"
+    ></app-user-card-dumb>
+  </div>
+</div>
