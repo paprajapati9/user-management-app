@@ -9,6 +9,7 @@ export class UserGateway {
 
     newUserNotification(user: IUser) {
         console.log(user);
+        // Emit new user added notification
         this.server.emit('newUserAdded', user);
     }
 }

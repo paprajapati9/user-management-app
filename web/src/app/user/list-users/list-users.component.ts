@@ -83,6 +83,7 @@ export class ListUsersComponent implements OnInit {
     this.filtersForm.valueChanges
       .pipe(
         debounceTime(300),
+        // Only perform query when any of the filters have changed
         distinctUntilChanged((prev, curr) => {
           return (
             prev.query === curr.query &&
@@ -115,8 +116,6 @@ export class ListUsersComponent implements OnInit {
   }
 
   onScroll() {
-    console.log('on scroll called');
-    const query = this.filtersForm.controls['query'].value;
     this.loadUsers(this.users.length); // Load more users when scrolled to the bottom
   }
 }

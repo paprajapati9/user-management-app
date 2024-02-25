@@ -30,8 +30,6 @@ export class UserController {
     }),
   )
   async create(@Body() createUserDto: CreateUserDto) {
-    console.log(createUserDto, 'create');
-
     if (createUserDto.password !== createUserDto.confirmPassword) {
       throw new BadRequestException(
         'Password and ConfirmPassword should be same',

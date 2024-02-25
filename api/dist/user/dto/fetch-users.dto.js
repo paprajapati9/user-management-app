@@ -9,13 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FetchUsersDto = exports.SortOrder = void 0;
+exports.FetchUsersDto = void 0;
 const class_validator_1 = require("class-validator");
-var SortOrder;
-(function (SortOrder) {
-    SortOrder["DESC"] = "desc";
-    SortOrder["ASC"] = "asc";
-})(SortOrder || (exports.SortOrder = SortOrder = {}));
 class FetchUsersDto {
 }
 exports.FetchUsersDto = FetchUsersDto;

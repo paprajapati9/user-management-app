@@ -24,7 +24,6 @@ let UserController = class UserController {
         this.userGateway = userGateway;
     }
     async create(createUserDto) {
-        console.log(createUserDto, 'create');
         if (createUserDto.password !== createUserDto.confirmPassword) {
             throw new common_1.BadRequestException('Password and ConfirmPassword should be same');
         }

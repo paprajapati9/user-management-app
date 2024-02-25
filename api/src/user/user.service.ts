@@ -42,7 +42,7 @@ export class UserService {
         { $limit: limit as number }, // Limit the number of records
         {
           $sort: {
-            [sortKey]: sortDirection,
+            [sortKey]: sortDirection, // Sort based on key and direction
           },
         },
         {

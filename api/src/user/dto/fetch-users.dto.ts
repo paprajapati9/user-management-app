@@ -1,9 +1,4 @@
-import { IsInt, Min, Max, IsString, IsOptional, IsIn } from 'class-validator';
-
-export enum SortOrder {
-    DESC = 'desc',
-    ASC = 'asc'
-}
+import { IsInt, Min, Max, IsString, IsIn } from 'class-validator';
 
 export class FetchUsersDto {
   @IsString()
