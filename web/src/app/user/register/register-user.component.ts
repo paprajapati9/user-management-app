@@ -68,7 +68,6 @@ export class RegisterUserComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('submit called')
     if (this.userRegistrationForm.valid) {
       // Handle form submission
       const { username, email, password, confirmPassword, dob } =
@@ -83,26 +82,27 @@ export class RegisterUserComponent implements OnInit {
       this.userService.createUser(newUser).subscribe(user => {
         console.log(user, 'user added')
         this.toastr.success('User Registered Successfully');
-        console.log(this.userRegistrationForm, 'form')
-        this.userRegistrationForm.controls['username'].markAsUntouched();
-        this.userRegistrationForm.reset({
-          username: null,
-          email: null,
-          dob: null,
-          password: null,
-          confirmPassword: null,
-        });
+        this.userRegistrationForm.reset();
+
+        // Remove errors appearing after reset of the form
+        this.userRegistrationForm.controls['username'].setErrors(null);
+        this.userRegistrationForm.controls['email'].setErrors(null);
+        this.userRegistrationForm.controls['dob'].setErrors(null);
+        this.userRegistrationForm.controls['password'].setErrors(null);
+        this.userRegistrationForm.controls['confirmPassword'].setErrors(null);
       });
     }
   }
 
   togglePasswordVisibility(event: Event): void {
-    event.stopImmediatePropagation();
+    event.preventDefault();
+    event.stopPropagation();
     this.hidePassword = !this.hidePassword;
   }
 
   toggleConfirmPasswordVisibility(event: Event): void {
-    event.stopImmediatePropagation();
+    event.preventDefault();
+    event.stopPropagation();
     this.hideConfirmPassword = !this.hideConfirmPassword;
   }
 }
