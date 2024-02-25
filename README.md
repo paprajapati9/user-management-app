@@ -5,7 +5,7 @@ Objective: Develop a user registration and management system using Angular, Nest
 
 ## About Application
 
-There are 2 parts of the application. One is backend or api and the other is frontend or web. Api has the backend code developed with NestJs and runs the backend server while the frontend is an Angular 16 standalone based type web application.
+There are 2 parts of the application. One is backend or api and the other is frontend or web. Api has the backend code developed with NestJs and runs the backend server while the frontend is an Angular 16 standalone based type web application. The application uses MongoDB Atlas for database.
 
 
 ## Running Application
@@ -27,3 +27,24 @@ For running api, follow the following steps:
 1. cd ./web
 2. npm install
 3. npm run start
+4. Open http://localhost:4200/ in your browser and see the running application!!
+
+## Testing Application
+
+There are 2 Critical User Journeys in this application
+
+### 1. User Registration
+
+1. Opening http://localhost:4200/ on your browser redirects to http://localhost:4200/register page where you can register a new user.
+2. Fill up username, email, date of birth, password and confirm password fields.
+3. Once all the fields are correctly entered, Register button is enabled, clicking this button, creates a new user with given data and shows a Success message to you.
+4. If you try to create a user with existing email, you would be shown an error message.
+
+
+### 2. User Management (List of all registered users on application)
+
+1. Opening http://localhost:4200/users opens a page with list of all users registered in the application in a infinite scroll type pagination
+2. You can search users based on username and email.
+3. You can sort users based on username, email, createdAt fields in asc and desc order.
+4. When a new user is registered, you get a info message saying a new user is added without needing to refresh the page.
+5. When a new user is added, the list of users is auto refreshed.
