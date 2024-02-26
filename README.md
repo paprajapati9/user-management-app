@@ -54,3 +54,10 @@ There are 2 Critical User Journeys in this application
 1. When creating user, we only store masked password i.e we encrypt it before storing in db.
 2. When user data is fetched for list of users, we have excluded password field from being selected as part of data returned.
 3. When creating user with same email, it returns an error
+
+## Future Improvements
+
+1. Better UI (UI is bit basic due to time constraint)
+2. JWT Token based authentication for user management page with adding a auth middleware in backend
+3. Global interceptors for http requests in web app for error handling
+
