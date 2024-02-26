@@ -38,6 +38,7 @@ export class RegisterUserComponent implements OnInit {
   userRegistrationForm!: FormGroup;
   hidePassword = true;
   hideConfirmPassword = true;
+  maxDateOfBirth = new Date();
 
   constructor(
     private formBuilder: FormBuilder,

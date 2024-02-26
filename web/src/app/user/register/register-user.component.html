@@ -11,7 +11,7 @@
         </mat-form-field>
         <mat-form-field>
             <mat-label>Date of Birth</mat-label>
-            <input matInput [matDatepicker]="picker" placeholder="Date of Birth" formControlName="dob">
+            <input matInput [matDatepicker]="picker" placeholder="Date of Birth" formControlName="dob" [max]="maxDateOfBirth">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
